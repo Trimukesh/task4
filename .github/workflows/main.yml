@@ -3,25 +3,15 @@
 name: CI
 
 # Controls when the workflow will run
-on: pull_request
+on: push
 
 jobs:
-  stale:
+  job1:
     runs-on: ubuntu-latest
-
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
-
-      # Runs a single command using the runners shell
-      - name: Require Pull Request approvals
-  # You may pin to the exact commit or the version.
-  # uses: manuelmeister/require-approved-pull-request-action@902369d0610e0df39589eedcae3ab228d3a64a8d
-        uses: manuelmeister/require-approved-pull-request-action@0.0.1
-        with:
-    # Token to authenticate with when connecting to Github
-         id: srinivasareddy4218
-    # Minimum approvals
-         minimum_approvals: 1
-         run: echo 'hai'
+     - uses: trstringer/manual-approval@v1
+       with:
+          secret: ${{ github.TOKEN }}
+          approvers: srinivasareddy4218
+          minimum-approvals: 1
+          issue-title: "Deploying v1.3.5 to prod from staging"
