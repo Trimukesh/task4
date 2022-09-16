@@ -9,7 +9,7 @@ jobs:
   job1:
     runs-on: windows-latest
     steps:
-     - uses: trstringer/manual-approval@2.296.2
+     - uses: trstringer/manual-approval@v
        with:
           secret: ${{ github.TOKEN }}
           approvers: Trimukesh
