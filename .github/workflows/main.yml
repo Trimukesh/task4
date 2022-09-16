@@ -21,6 +21,6 @@ jobs:
         uses: manuelmeister/require-approved-pull-request-action@0.0.1
         with:
     # Token to authenticate with when connecting to Github
-          token: srinivasreddy4218
+         token: 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
     # Minimum approvals
-          minimum_approvals: 1
+         minimum_approvals: 1
