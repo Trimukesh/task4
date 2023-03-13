@@ -24,7 +24,7 @@ jobs:
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: srinivasareddy4218
+          approvers: srinivasareddy4218,Trimukesh
           minimum-approvals: 1
           issue-title: "Deploying v1.3.5 to prod from staging"
       - name: Run a multi-line script
