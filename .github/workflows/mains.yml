@@ -22,7 +22,7 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
   
-      - uses: trstringer/manual-approval@v1
+      - uses: macnev2013/manual-approval@latest
         with:
           secret: ${{ github.TOKEN }}
           approvers: srinivasareddy4218,steja6872
