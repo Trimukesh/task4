@@ -1,3 +1,4 @@
+
 # This is a basic workflow to help you get started with Actions
 name: manual approval
 # Controls when the workflow will run
@@ -21,10 +22,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
+  
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: srinivasareddy4218 steja6872
+          approvers: srinivasareddy4218
           minimum-approvals: 1
           issue-title: "Deploying v1.3.5 to prod from staging"
       - name: Run a multi-line script
