@@ -26,6 +26,7 @@ jobs:
         with:
           secret: ${{ github.TOKEN }}
           approvers: srinivasareddy4218,steja6872
+          minimum approvers: 1
           issue-title: "Deploying v1.3.5 to prod from staging"
       - name: Run a multi-line script
         run: |
