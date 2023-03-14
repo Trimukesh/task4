@@ -27,6 +27,7 @@ jobs:
           secret: ${{ github.TOKEN }}
           approvers: srinivasareddy4218,steja6872
           minimum-approvals: 1
+          exclude-workflow-initiator-as-approver: true
           issue-title: "Deploying v1.3.5 to prod from staging"
       - name: Run a multi-line script
         run: |
