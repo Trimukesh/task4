@@ -34,10 +34,10 @@ jobs:
           minimum-approvals: 1
           exclude-workflow-initiator-as-approver: true
           issue-title: "Need approval to run this test job"
-          run: |
+          issue-body: |
             The job without approval output:
             ```
-            $(cat job_output.txt)
+          run: $(cat job_output.txt)
             ```
       - uses: actions/checkout@v1    
       - name: Run a multi-line script
