@@ -37,7 +37,7 @@ jobs:
           issue-body: |
             The job without approval output:
             ```
-          run: $(cat job_output.txt)
+            source job_output.txt
             ```
       - uses: actions/checkout@v1    
       - name: Run a multi-line script
