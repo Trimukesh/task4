@@ -16,18 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Run a one-line script 
-        id: job_without_approval
         run: echo hello > job_output.txt
-        # Store the job output as a step output
-        # to be used in the manual approval message
-        # Note: outputs are only available to subsequent steps
-        # in the same job or to dependent jobs
-        # see: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idoutputs
-        # 
-        # The syntax to reference the output in the manual approval message is:
-        # ${ { steps.job_without_approval.outputs.job_output } }
-        # where 'job_without_approval' is the id of the job and 'job_output' is the name of the output
-        # (in this case, 'job_output.txt')
 
   # This job requires approval
   job_needs_approval:
@@ -38,14 +27,14 @@ jobs:
         uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: srinivasareddy4218, steja6872
+          approvers: srinivasareddy4218,steja6872
           minimum-approvals: 1
           exclude-workflow-initiator-as-approver: true
           issue-title: "Need approval to run this test job"
           issue-body: |
             The job without approval output:
             ```
-            ${ { steps.job_without_approval.outputs.job_output } }
+            $(cat job_output.txt)
             ```
             Please review and approve the above output to proceed with the job.
 
