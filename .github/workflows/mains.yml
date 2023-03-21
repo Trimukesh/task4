@@ -34,7 +34,7 @@ jobs:
           minimum-approvals: 1
           exclude-workflow-initiator-as-approver: true
           issue-title: "Need approval to run this test job"
-          issue-body: |
+          run: |
             The job without approval output:
             ```
             $(cat job_output.txt)
