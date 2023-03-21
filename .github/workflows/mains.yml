@@ -38,7 +38,7 @@ jobs:
         uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: steja6872
+          approvers: srinivasareddy4218, steja6872
           minimum-approvals: 1
           exclude-workflow-initiator-as-approver: true
           issue-title: "Need approval to run this test job"
