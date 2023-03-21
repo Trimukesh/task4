@@ -1,17 +1,44 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
+name: manual approval
 # Controls when the workflow will run
-on: push
-
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  job1:
-    runs-on: windows-latest
+  # This workflow contains a single job called "build"
+  job_without_approval:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
     steps:
-     - uses: trstringer/manual-approval@v1
-       with:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v1
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+      
+  job_needs_approval:
+    needs: job_without_approval
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request manual approval
+        uses: trstringer/manual-approval@v1
+        with:
           secret: ${{ github.TOKEN }}
-          approvers: Trimukesh
+          approvers: srinivasareddy4218,steja6872
           minimum-approvals: 1
-          issue-title: "Deploying v1.3.5 to prod from staging"
+          exclude-workflow-initiator-as-approver: true
+          issue-title: "Need approval to run this test job"
+          issue-body: |
+            The job without approval output:
+            '''
+            $(cat job_output.txt)
+            '''
+      - uses: actions/checkout@v1    
+      - name: Run a multi-line script
+        run: |
+          echo "This job needs approvals to run"
+          echo "After approving job will run"
