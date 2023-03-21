@@ -12,7 +12,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v1
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Run a one-line script > job_output.txt
       
   job_needs_approval:
     needs: job_without_approval
@@ -28,9 +28,9 @@ jobs:
           issue-title: "Need approval to run this test job"
           issue-body: |
             The job without approval output:
-            '''
+            ```
             $(cat job_output.txt)
-            '''
+            ```
       - uses: actions/checkout@v1    
       - name: Run a multi-line script
         run: |
