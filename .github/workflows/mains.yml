@@ -34,7 +34,7 @@ jobs:
           issue-body: |
             The job without approval output:
             ```
-            $(cat job_output.txt)
+            $(`cat job_output.txt`)
             ```
             Please review and approve the above output to proceed with the job.
 
