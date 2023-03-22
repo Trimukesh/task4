@@ -37,11 +37,8 @@ jobs:
           $(cat ${{ github.workspace }}/job_output.txt)
           ```
           Please review and approve the above output to proceed with the job.
-    - name: Download job output artifact
-      uses: actions/download-artifact@v1
-      with:
-        name: job_output
-        path: ${{ github.workspace }}
+    
+    - uses: actions/checkout@v1    
     - name: Run a multi-line script
       run: |
         echo "This job needs approvals to run"
