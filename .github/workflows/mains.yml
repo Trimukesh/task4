@@ -32,6 +32,10 @@ jobs:
         secret: ${{ github.TOKEN }}
         approvers: srinivasareddy4218,steja6872
         minimum-approvals: 1
+    - name: Download job output artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: job_output
         exclude-workflow-initiator-as-approver: true
         issue-title: "Need approval to run this test job"
         issue-body: |
