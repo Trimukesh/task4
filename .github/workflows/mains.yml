@@ -36,13 +36,14 @@ jobs:
         issue-body: |
           The job without approval output:
           ```
-          ${{ format('https://github.com/{0}/{1}/blob/{2}/job_output.txt', github.repository_owner, github.repository, github.sha) }}
+          $(cat "${{ github.event_path }}" | jq -r .client_payload.job_output)
           ```
           Please review and approve the above output to proceed with the job.
-    - name: Download job output artifact
-      uses: actions/download-artifact@v2
+    - name: Upload job output artifact
+      uses: actions/upload-artifact@v2
       with:
         name: job_output
+        path: job_output.txt
     - name: Run a multi-line script
       run: |
         echo "This job needs approvals to run"
