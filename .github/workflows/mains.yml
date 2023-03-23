@@ -18,8 +18,12 @@ jobs:
     - name: Upload job output artifact
       uses: actions/upload-artifact@v2
       with:
-        name: job_output
-        path: job_output.txt
+       name: job_output
+       path: job_output.txt
+       runs-on: ubuntu-latest
+  env:
+    node-version: 16.x
+
 
  job_needs_approval:
   needs: job_without_approval
