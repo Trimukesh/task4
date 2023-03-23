@@ -36,7 +36,7 @@ jobs:
         issue-body: |
           The job without approval output:
           ```
-          ${{ format('https://github.com/{0}/{1}/blob/{2}/job_output.txt', github.repository_owner, github.repository, github.sha) }}
+          C:\Users\tpadala\actions-runner\actions-runner\actions-runner\_work\task4\task4
           ```
           Please review and approve the above output to proceed with the job.
     - name: Download job output artifact
