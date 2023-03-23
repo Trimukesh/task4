@@ -31,7 +31,7 @@ jobs:
           secret: ${{ github.TOKEN }}
           approvers: srinivasareddy4218,steja6872
           minimum-approvals: 1
-          email-to: srinivasareddy4218@gmail.com
+          email-to: steja6872@gmail.com
           subject: "Need approval to run this test job"
           body: "The job without approval output is attached. Please review and approve the above output to proceed with the job."
           attachments: |
