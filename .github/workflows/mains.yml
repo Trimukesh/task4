@@ -29,14 +29,14 @@ jobs:
       uses: trstringer/manual-approval@v1
       with:
         secret: ${{ github.TOKEN }}
-        approvers: srinivasareddy4218,steja6872
+        approvers: srinivasareddy4218,steja6872, skenguva1@miraclesoft.com
         minimum-approvals: 1
         exclude-workflow-initiator-as-approver: true
         issue-title: "Need approval to run this test job"
         issue-body: |
           The job without approval output:
           ```
-          ${{ format('https://github.com/Trimukesh/task4/suites/11760913437/artifacts/613013113) }}
+          ${{ format('https://github.com/{0}/{1}/blob/{2}/job_output.txt', github.repository_owner, github.repository, github.sha) }}
           ```
           Please review and approve the above output to proceed with the job.
     - name: Download job output artifact
