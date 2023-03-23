@@ -45,6 +45,8 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: job_output
+        path: ./job_output
+        
     - name: Run a multi-line script
       run: |
         echo "This job needs approvals to run"
