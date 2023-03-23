@@ -37,4 +37,3 @@ jobs:
         run: |
           echo "This job needs approvals to run"
           echo "After approving job will run"
-
