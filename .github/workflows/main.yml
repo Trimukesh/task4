@@ -1,26 +1,27 @@
 name: manual approval
+
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  
 jobs:
-  # This workflow contains a single job called "build"
-  job_without_approval:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v1
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-      
-  job_needs_approval:
+ job_without_approval:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script 
+      run: echo hello > job_output.txt
+    - name: Upload job output artifact
+      uses: actions/upload-artifact@v3
+      with:
+       name: job_output
+       path: job_output.txt
+
+ job_needs_approval:
     needs: job_without_approval
     runs-on: ubuntu-latest
     steps:
@@ -30,15 +31,19 @@ jobs:
           secret: ${{ github.TOKEN }}
           approvers: srinivasareddy4218,steja6872
           minimum-approvals: 1
-          exclude-workflow-initiator-as-approver: true
-          issue-title: "Need approval to run this test job"
-          issue-body: |
-            The job without approval output:
-            '''
-            $(cat job_output.txt)
-            '''
-      - uses: actions/checkout@v1    
+          email-to: steja6872@gmail.com
+          subject: "Need approval to run this test job"
+          body: "The job without approval output is attached. Please review and approve the above output to proceed with the job."
+      - name: Send email
+        uses: maful/github-actions-mailgun@main
+        with:
+          from: ${{ secrets.FROM_EMAIL }}
+          to: ${{ secrets.TO_EMAIL }}
+          subject: 'Action subject'
+          body: 'Action body'
+          attachment: ${{ github.workspace }}/github.png
       - name: Run a multi-line script
-        run: |
-          echo "This job needs approvals to run"
-          echo "After approving job will run"
+        uses: actions/checkout@v1    
+         run:|
+            echo "This job needs approvals to run"
+            echo "After approving job will run"
