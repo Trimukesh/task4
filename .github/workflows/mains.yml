@@ -45,7 +45,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: job_output
-        path: cat ./job_output/job_output.txt
+        path: cat ./job_output.txt
 
     - name: Run a multi-line script
       run: |
