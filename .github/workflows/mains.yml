@@ -16,13 +16,11 @@ jobs:
     - name: Run a one-line script 
       run: echo hello > job_output.txt
     - name: Upload job output artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
        name: job_output
        path: job_output.txt
-       runs-on: ubuntu-latest
-  env:
-    node-version: 16.x
+
 
 
  job_needs_approval:
