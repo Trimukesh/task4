@@ -1,4 +1,5 @@
 name: manual approval
+
 # Controls when the workflow will run
 on:
   push:
@@ -9,7 +10,7 @@ on:
   
 jobs:
  job_without_approval:
-  runs-on: self-hosted
+  runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script 
@@ -22,10 +23,10 @@ jobs:
 
  job_needs_approval:
   needs: job_without_approval
-  runs-on: windows-latest
+  runs-on: ubuntu-latest
   steps:
     - name: Request manual approval
-      uses: colpal/actions-approval@v1.2.0
+      uses: trstringer/manual-approval@v1
       with:
         secret: ${{ github.TOKEN }}
         approvers: srinivasareddy4218,steja6872
@@ -35,13 +36,15 @@ jobs:
         issue-body: |
           The job without approval output:
           ```
-          C:/Users/tpadala/actions-runner/actions-runner/actions-runner/_work/task4/task4
+          ${{ format('https://github.com/{0}/{1}/blob/{2}/job_output.txt', github.repository_owner, github.repository, github.sha) }}
           ```
           Please review and approve the above output to proceed with the job.
     - name: Download job output artifact
       uses: actions/download-artifact@v2
       with:
         name: job_output
+        run: cat ${{ github.workspace }}/job_output.txt
+        
     - name: Run a multi-line script
       run: |
         echo "This job needs approvals to run"
