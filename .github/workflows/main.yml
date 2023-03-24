@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Request manual approval
-        uses: peter-evans/create-pull-request@v3.12.0
+        uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
           approvers: srinivasareddy4218,steja6872
