@@ -21,7 +21,7 @@ jobs:
       with:
         name: job_output
         path: job_output.txt
-        repository: Trimukesh/task4
+        repository: Trimukesh/task4/https://github.com/Trimukesh/task4.git
         
 
  job_needs_approval:
