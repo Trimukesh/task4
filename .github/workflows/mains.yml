@@ -22,7 +22,7 @@ jobs:
 
  job_needs_approval:
   needs: job_without_approval
-  runs-on: self-hosted
+  runs-on: ubuntu-latest
   steps:
     - name: Request manual approval
       uses: thollander/actions-approval@v1
