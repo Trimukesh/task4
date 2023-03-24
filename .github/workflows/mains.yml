@@ -22,10 +22,10 @@ jobs:
 
  job_needs_approval:
   needs: job_without_approval
-  runs-on: windows-latest
+  runs-on: self-hosted
   steps:
     - name: Request manual approval
-      uses: thollander/actions-approval@v2
+      uses: thollander/actions-approval@v1
       with:
         secret: ${{ github.TOKEN }}
         approvers: srinivasareddy4218,steja6872
