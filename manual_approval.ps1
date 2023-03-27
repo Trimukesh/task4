@@ -1,4 +1,4 @@
-$repoUrl = "https://github.com/your-username/your-repo"
+$repoUrl = "https://github.com/Trimukesh/task4.git"
 $approvalMsg = "Do you want to continue with the operation in $repoUrl? (Y/N)"
 $approverList = "sarikatla@miraclesoft.com"
 
