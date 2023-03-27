@@ -1,6 +1,6 @@
 $repoUrl = "https://github.com/Trimukesh/task4.git"
 $approvalMsg = "Do you want to continue with the operation in $repoUrl? (Y/N)"
-$approverList = "sarikatla@miraclesoft.com"
+$approverList = "sarikatla@miraclesoft.com,srinivasareddyarikatla4795@gmail.com"
 
 $approval = Read-Host $approvalMsg
 if ($approval -eq "Y") {
