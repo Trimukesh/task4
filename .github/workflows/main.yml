@@ -1,31 +1,17 @@
-name: manual approval
-
-# Controls when the workflow will run
+name: Manual Approval Workflow
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
-  
+    branches:
+      - main
 jobs:
- job_without_approval:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script 
-      run: echo hello > job_output.txt
-    - name: Upload job output artifact
-      uses: actions/upload-artifact@v3
-      with:
-       name: job_output
-       path: job_output.txt
 
- job_needs_approval:
-    needs: job_without_approval
+
+  test:
+  
     runs-on: windows-latest
     steps:
-      - name: Request manual approval
+      # Your test steps here
+      - name: Wait for manual approval
         uses: actions/github-script@v4
         with:
           script: |
@@ -38,12 +24,17 @@ jobs:
               body: 'Please approve this workflow to continue.',
             });
             core.exportVariable('APPROVAL_URL', url);
-      - name: Send email
-        uses: maful/github-actions-mailgun@main
-        with:
-          from: ${{ secrets.FROM_EMAIL }}
-          to: ${{ secrets.TO_EMAIL }}
-          subject: 'Action subject'
-          body: 'Action body'
-          attachment: ${{ github.workspace }}/github.png
 
+      - name: Notify approver
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const url = process.env.APPROVAL_URL;
+            await github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: url.split('/').pop(),
+              body: `@username Please approve this workflow by clicking [here](${url}).`,
+            });
+
+      # Your remaining steps here
