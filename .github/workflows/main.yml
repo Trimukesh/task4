@@ -19,7 +19,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'Manual approval needed for workflow',
-              head: context.sha,
               base: 'main',
               body: 'Please approve this workflow to continue.',
             });
