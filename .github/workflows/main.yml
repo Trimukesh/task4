@@ -26,7 +26,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Request manual approval
-        uses: actions/github-script@v4
+        uses: peter-evans/wait-for-manual-action@v1
         with:
           secret: ${{ github.TOKEN }}
           approvers: srinivasareddy4218,steja6872
