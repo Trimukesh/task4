@@ -42,8 +42,4 @@ jobs:
           subject: 'Action subject'
           body: 'Action body'
           attachment: ${{ github.workspace }}/github.png
-      - name: Run a multi-line script
-        uses: actions/checkout@v1    
-         run:|
-            echo "This job needs approvals to run"
-            echo "After approving job will run"
+
