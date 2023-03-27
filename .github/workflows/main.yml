@@ -26,14 +26,18 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Request manual approval
-        uses: peter-evans/wait-for-manual-action@v1
+        uses: actions/github-script@v4
         with:
-          secret: ${{ github.TOKEN }}
-          approvers: srinivasareddy4218,steja6872
-          minimum-approvals: 1
-          email-to: steja6872@gmail.com
-          subject: "Need approval to run this test job"
-          body: "The job without approval output is attached. Please review and approve the above output to proceed with the job."
+          script: |
+            const { data: { html_url: url } } = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Manual approval needed for workflow',
+              head: context.sha,
+              base: 'main',
+              body: 'Please approve this workflow to continue.',
+            });
+            core.exportVariable('APPROVAL_URL', url);
       - name: Send email
         uses: maful/github-actions-mailgun@main
         with:
