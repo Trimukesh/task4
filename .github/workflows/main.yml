@@ -9,37 +9,22 @@ on:
   workflow_dispatch:
   
 jobs:
- job_without_approval:
-  runs-on: self-hosted
-  steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script 
-      run: |
-        echo hello > job_output.txt
-        ./manual_approval.ps1
- job_needs_approval:
-    needs: job_without_approval
-    runs-on: self-hosted
+  build:
+    runs-on: windows-latest
     steps:
-      - name: Request manual approval
-        uses: actions/github-script@v4
+      - name: Build app
+        run: |
+          # build steps go here
+
+      - name: Manual approval
+        id: approval
+        uses: "peter-evans/wait-on@v2"
         with:
-          secret: ${{ github.TOKEN }}
-          approvers: srinivasareddy4218,steja6872
-          minimum-approvals: 1
-          email-to: steja6872@gmail.com
-          subject: "Need approval to run this test job"
-          body: "The job without approval output is attached. Please review and approve the above output to proceed with the job."
-      - name: Send email
-        uses: maful/github-actions-mailgun@main
-        with:
-          from: ${{ secrets.FROM_EMAIL }}
-          to: ${{ secrets.TO_EMAIL }}
-          subject: 'Action subject'
-          body: 'Action body'
-          attachment: ${{ github.workspace }}/github.png
-      - name: Run a multi-line script
-        uses: actions/checkout@v1    
-         run:|
-            echo "This job needs approvals to run"
-            echo "After approving job will run"
+          resources: |
+            http-get://localhost:8080
+          timeout: "10m"
+
+      - name: Deploy app
+        if: steps.approval.outputs.result == 'success'
+        run: |
+          # deployment steps go here
